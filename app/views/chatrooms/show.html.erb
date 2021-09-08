@@ -4,17 +4,11 @@
   </h1>
   <div id="messages" data-chatroom-id="<%= @chatroom.id %>">
     <% @chatroom.messages.each do |message| %>
-      <div class="message-container" id="message-<%= message.id %>">
-        <div class="author">
-          <span><%= message.user.nickname %></span>
-          <small><%= message.created_at.strftime("%a %b %e at %l:%M%p") %></small>
-        </div>
-        <p><%= message.content %></p>
-      </div>
+      <%= render 'messages/message', message: message %>
     <% end %>
   </div>
 
   <%= simple_form_for [ @chatroom, @message ], remote: true do |f| %>
-    <%= f.input :content, label: false, placeholder: "Message ##{@chatroom.name}" %>
+    <%= f.input :content, label: false, placeholder: "#{@chatroom.name}" %>
   <% end %>
 </div>
