@@ -5,11 +5,14 @@ const initChatroom = () => {
   if (messagesContainer) {
     const id = messagesContainer.dataset.chatroomId;
 
-    consumer.subscriptions.create({ channel: "ChatroomChannel", id: id }, {
-      received(data) {
-        messagesContainer.insertAdjacentHTML('beforeend', data);
+    consumer.subscriptions.create(
+      { channel: "ChatroomChannel", id: id },
+      {
+        received(message) {
+          messagesContainer.insertAdjacentHTML('beforeend', message);
+        }
       }
-    });
+    );
   }
 }
 
